@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,25 +9,33 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
-      --bg:        #0c0f0a;
-      --surface:   #131710;
-      --panel:     #1a1f16;
-      --border:    #2a3026;
-      --accent:    #c8f06a;
-      --accent-dim:#8ab84a;
-      --amber:     #f0b429;
-      --red:       #f06a6a;
-      --text:      #e8eddf;
-      --muted:     #7a8a6e;
-      --mono:      'IBM Plex Mono', monospace;
-      --sans:      'Syne', sans-serif;
-      --serif:     'DM Serif Display', serif;
+      --bg: #0c0f0a;
+      --surface: #131710;
+      --panel: #1a1f16;
+      --border: #2a3026;
+      --accent: #c8f06a;
+      --accent-dim: #8ab84a;
+      --amber: #f0b429;
+      --red: #f06a6a;
+      --text: #e8eddf;
+      --muted: #7a8a6e;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'Syne', sans-serif;
+      --serif: 'DM Serif Display', serif;
     }
 
     body {
@@ -51,7 +60,10 @@
       z-index: 0;
     }
 
-    #root { position: relative; z-index: 1; }
+    #root {
+      position: relative;
+      z-index: 1;
+    }
 
     /* ── HEADER ── */
     header {
@@ -60,7 +72,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(12,15,10,0.8);
+      background: rgba(12, 15, 10, 0.8);
       backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
@@ -84,8 +96,8 @@
       font-family: var(--mono);
       font-size: 0.65rem;
       color: var(--accent);
-      background: rgba(200,240,106,0.08);
-      border: 1px solid rgba(200,240,106,0.2);
+      background: rgba(200, 240, 106, 0.08);
+      border: 1px solid rgba(200, 240, 106, 0.2);
       padding: 2px 8px;
       border-radius: 2px;
       letter-spacing: 0.08em;
@@ -118,7 +130,10 @@
       outline: none;
       transition: border-color 0.2s;
     }
-    .api-input:focus { border-color: var(--accent-dim); }
+
+    .api-input:focus {
+      border-color: var(--accent-dim);
+    }
 
     /* ── MAIN LAYOUT ── */
     main {
@@ -139,6 +154,7 @@
       align-items: center;
       gap: 10px;
     }
+
     .section-label::after {
       content: '';
       flex: 1;
@@ -154,22 +170,28 @@
       text-align: center;
       cursor: pointer;
       transition: all 0.2s ease;
-      background: rgba(26,31,22,0.4);
+      background: rgba(26, 31, 22, 0.4);
       position: relative;
       overflow: hidden;
     }
+
     .dropzone::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at center, rgba(200,240,106,0.04) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(200, 240, 106, 0.04) 0%, transparent 70%);
       pointer-events: none;
     }
-    .dropzone:hover, .dropzone.drag-over {
+
+    .dropzone:hover,
+    .dropzone.drag-over {
       border-color: var(--accent-dim);
-      background: rgba(200,240,106,0.04);
+      background: rgba(200, 240, 106, 0.04);
     }
-    .dropzone.drag-over { border-style: solid; }
+
+    .dropzone.drag-over {
+      border-style: solid;
+    }
 
     .drop-icon {
       font-size: 2.5rem;
@@ -197,7 +219,7 @@
       font-family: var(--mono);
       font-size: 0.72rem;
       color: var(--accent);
-      border: 1px solid rgba(200,240,106,0.3);
+      border: 1px solid rgba(200, 240, 106, 0.3);
       padding: 8px 20px;
       border-radius: 3px;
       letter-spacing: 0.08em;
@@ -205,8 +227,9 @@
       cursor: pointer;
       transition: all 0.2s;
     }
+
     .drop-btn:hover {
-      background: rgba(200,240,106,0.08);
+      background: rgba(200, 240, 106, 0.08);
       border-color: var(--accent);
     }
 
@@ -227,16 +250,18 @@
       background: var(--panel);
       animation: fadeIn 0.3s ease;
     }
+
     .thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
     .thumb-remove {
       position: absolute;
       top: 4px;
       right: 4px;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0, 0, 0, 0.7);
       border: none;
       color: #fff;
       width: 20px;
@@ -250,13 +275,17 @@
       opacity: 0;
       transition: opacity 0.2s;
     }
-    .thumb:hover .thumb-remove { opacity: 1; }
+
+    .thumb:hover .thumb-remove {
+      opacity: 1;
+    }
+
     .thumb-name {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
       font-family: var(--mono);
       font-size: 0.55rem;
       color: #ccc;
@@ -299,19 +328,21 @@
       color: #0c0f0a;
       font-weight: 700;
     }
+
     .btn-primary:hover:not(:disabled) {
       background: #d8ff7a;
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(200,240,106,0.2);
+      box-shadow: 0 4px 16px rgba(200, 240, 106, 0.2);
     }
 
     .btn-secondary {
       background: transparent;
       color: var(--accent);
-      border: 1px solid rgba(200,240,106,0.35);
+      border: 1px solid rgba(200, 240, 106, 0.35);
     }
+
     .btn-secondary:hover:not(:disabled) {
-      background: rgba(200,240,106,0.07);
+      background: rgba(200, 240, 106, 0.07);
       border-color: var(--accent);
     }
 
@@ -321,10 +352,11 @@
       font-weight: 700;
       margin-left: auto;
     }
+
     .btn-export:hover:not(:disabled) {
       background: #ffc940;
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(240,180,41,0.25);
+      box-shadow: 0 4px 16px rgba(240, 180, 41, 0.25);
     }
 
     /* ── STATUS BAR ── */
@@ -339,10 +371,30 @@
       gap: 8px;
       animation: fadeIn 0.3s ease;
     }
-    .status-bar.loading { background: rgba(200,240,106,0.07); color: var(--accent); border: 1px solid rgba(200,240,106,0.15); }
-    .status-bar.success { background: rgba(200,240,106,0.07); color: var(--accent); border: 1px solid rgba(200,240,106,0.15); }
-    .status-bar.error   { background: rgba(240,106,106,0.07); color: var(--red);   border: 1px solid rgba(240,106,106,0.15); }
-    .status-bar.info    { background: rgba(240,180,41,0.07);  color: var(--amber); border: 1px solid rgba(240,180,41,0.15); }
+
+    .status-bar.loading {
+      background: rgba(200, 240, 106, 0.07);
+      color: var(--accent);
+      border: 1px solid rgba(200, 240, 106, 0.15);
+    }
+
+    .status-bar.success {
+      background: rgba(200, 240, 106, 0.07);
+      color: var(--accent);
+      border: 1px solid rgba(200, 240, 106, 0.15);
+    }
+
+    .status-bar.error {
+      background: rgba(240, 106, 106, 0.07);
+      color: var(--red);
+      border: 1px solid rgba(240, 106, 106, 0.15);
+    }
+
+    .status-bar.info {
+      background: rgba(240, 180, 41, 0.07);
+      color: var(--amber);
+      border: 1px solid rgba(240, 180, 41, 0.15);
+    }
 
     .spinner {
       width: 12px;
@@ -372,6 +424,7 @@
       font-size: 0.7rem;
       color: var(--muted);
     }
+
     .results-count span {
       color: var(--accent);
       font-weight: 600;
@@ -380,12 +433,13 @@
     .file-errors {
       margin-bottom: 16px;
     }
+
     .file-error {
       font-family: var(--mono);
       font-size: 0.68rem;
       color: var(--red);
       padding: 6px 12px;
-      background: rgba(240,106,106,0.07);
+      background: rgba(240, 106, 106, 0.07);
       border-left: 2px solid var(--red);
       margin-bottom: 4px;
     }
@@ -419,8 +473,14 @@
       border-bottom: 1px solid var(--border);
       transition: background 0.15s;
     }
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
 
     td {
       padding: 10px 14px;
@@ -428,10 +488,27 @@
       vertical-align: middle;
     }
 
-    td.debito  { color: var(--red);   }
-    td.credito { color: var(--accent); }
-    td.saldo   { color: var(--amber);  font-weight: 500; }
-    td.ficheiro { color: var(--muted); font-size: 0.65rem; max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    td.debito {
+      color: var(--red);
+    }
+
+    td.credito {
+      color: var(--accent);
+    }
+
+    td.saldo {
+      color: var(--amber);
+      font-weight: 500;
+    }
+
+    td.ficheiro {
+      color: var(--muted);
+      font-size: 0.65rem;
+      max-width: 130px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
 
     td input {
       background: transparent;
@@ -443,21 +520,30 @@
       outline: none;
       min-width: 80px;
     }
+
     td input:focus {
-      background: rgba(200,240,106,0.05);
+      background: rgba(200, 240, 106, 0.05);
       border-radius: 2px;
     }
 
-    td.debito input  { color: var(--red); }
-    td.credito input { color: var(--accent); }
-    td.saldo input   { color: var(--amber); }
+    td.debito input {
+      color: var(--red);
+    }
+
+    td.credito input {
+      color: var(--accent);
+    }
+
+    td.saldo input {
+      color: var(--amber);
+    }
 
     .badge-tipo {
       display: inline-block;
       padding: 2px 8px;
       border-radius: 2px;
-      background: rgba(200,240,106,0.07);
-      border: 1px solid rgba(200,240,106,0.12);
+      background: rgba(200, 240, 106, 0.07);
+      border: 1px solid rgba(200, 240, 106, 0.12);
       color: var(--accent-dim);
       font-size: 0.65rem;
       max-width: 200px;
@@ -470,8 +556,8 @@
     .export-success {
       margin-top: 16px;
       padding: 16px 20px;
-      background: rgba(200,240,106,0.06);
-      border: 1px solid rgba(200,240,106,0.2);
+      background: rgba(200, 240, 106, 0.06);
+      border: 1px solid rgba(200, 240, 106, 0.2);
       border-radius: 6px;
       font-family: var(--mono);
       font-size: 0.75rem;
@@ -484,312 +570,338 @@
 
     /* ── ANIMATIONS ── */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      header { padding: 16px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
-      main   { padding: 28px 20px 60px; }
-      .api-input { width: 100%; }
-      .btn-export { margin-left: 0; }
+      header {
+        padding: 16px 20px;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      main {
+        padding: 28px 20px 60px;
+      }
+
+      .api-input {
+        width: 100%;
+      }
+
+      .btn-export {
+        margin-left: 0;
+      }
     }
   </style>
 </head>
+
 <body>
-<div id="root"></div>
+  <div id="root"></div>
 
-<script type="text/babel">
-const { useState, useRef, useCallback, useEffect } = React;
+  <script type="text/babel">
+    const { useState, useRef, useCallback, useEffect } = React;
 
-const COLS = [
-  { key: 'data_movimento', label: 'Data Mov.',    cls: '' },
-  { key: 'data_valor',     label: 'Data Val.',    cls: '' },
-  { key: 'tipo_movimento', label: 'Tipo',         cls: '' },
-  { key: 'debito',         label: 'Débito (AOA)', cls: 'debito' },
-  { key: 'credito',        label: 'Crédito (AOA)',cls: 'credito' },
-  { key: 'saldo',          label: 'Saldo (AOA)',  cls: 'saldo' },
-  { key: 'ficheiro',       label: 'Ficheiro',     cls: 'ficheiro' },
-];
+    const COLS = [
+      { key: 'data_movimento', label: 'Data Mov.', cls: '' },
+      { key: 'data_valor', label: 'Data Val.', cls: '' },
+      { key: 'tipo_movimento', label: 'Tipo', cls: '' },
+      { key: 'debito', label: 'Débito (AOA)', cls: 'debito' },
+      { key: 'credito', label: 'Crédito (AOA)', cls: 'credito' },
+      { key: 'saldo', label: 'Saldo (AOA)', cls: 'saldo' },
+      { key: 'ficheiro', label: 'Ficheiro', cls: 'ficheiro' },
+    ];
 
-function App() {
-  const [apiBase, setApiBase]           = useState(localStorage.getItem('api_base') || '');
-  const [files, setFiles]               = useState([]);
-  const [previews, setPreviews]         = useState([]);
-  const [status, setStatus]             = useState(null); // {type, msg}
-  const [loading, setLoading]           = useState(false);
-  const [transactions, setTransactions] = useState([]);
-  const [errors, setErrors]             = useState([]);
-  const [exporting, setExporting]       = useState(false);
-  const [exported, setExported]         = useState(false);
-  const [dragOver, setDragOver]         = useState(false);
-  const fileInputRef = useRef();
+    function App() {
+      const [apiBase, setApiBase] = useState(localStorage.getItem('api_base') || 'https://extrato-ocr-g608.onrender.com');
+      const [files, setFiles] = useState([]);
+      const [previews, setPreviews] = useState([]);
+      const [status, setStatus] = useState(null); // {type, msg}
+      const [loading, setLoading] = useState(false);
+      const [transactions, setTransactions] = useState([]);
+      const [errors, setErrors] = useState([]);
+      const [exporting, setExporting] = useState(false);
+      const [exported, setExported] = useState(false);
+      const [dragOver, setDragOver] = useState(false);
+      const fileInputRef = useRef();
 
-  useEffect(() => {
-    if (apiBase) localStorage.setItem('api_base', apiBase);
-  }, [apiBase]);
+      useEffect(() => {
+        if (apiBase) localStorage.setItem('api_base', apiBase);
+      }, [apiBase]);
 
-  const addFiles = useCallback((newFiles) => {
-    const imgs = Array.from(newFiles).filter(f => f.type.startsWith('image/'));
-    if (!imgs.length) return;
+      const addFiles = useCallback((newFiles) => {
+        const imgs = Array.from(newFiles).filter(f => f.type.startsWith('image/'));
+        if (!imgs.length) return;
 
-    setFiles(prev => {
-      const combined = [...prev, ...imgs].slice(0, 20);
-      return combined;
-    });
+        setFiles(prev => {
+          const combined = [...prev, ...imgs].slice(0, 20);
+          return combined;
+        });
 
-    imgs.forEach(f => {
-      const reader = new FileReader();
-      reader.onload = e => setPreviews(prev => [...prev, { name: f.name, url: e.target.result }].slice(0, 20));
-      reader.readAsDataURL(f);
-    });
+        imgs.forEach(f => {
+          const reader = new FileReader();
+          reader.onload = e => setPreviews(prev => [...prev, { name: f.name, url: e.target.result }].slice(0, 20));
+          reader.readAsDataURL(f);
+        });
 
-    setExported(false);
-    setStatus(null);
-  }, []);
+        setExported(false);
+        setStatus(null);
+      }, []);
 
-  const removeFile = (idx) => {
-    setFiles(p => p.filter((_, i) => i !== idx));
-    setPreviews(p => p.filter((_, i) => i !== idx));
-  };
+      const removeFile = (idx) => {
+        setFiles(p => p.filter((_, i) => i !== idx));
+        setPreviews(p => p.filter((_, i) => i !== idx));
+      };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setDragOver(false);
-    addFiles(e.dataTransfer.files);
-  };
+      const handleDrop = (e) => {
+        e.preventDefault();
+        setDragOver(false);
+        addFiles(e.dataTransfer.files);
+      };
 
-  const handleExtract = async () => {
-    if (!files.length) return;
-    const base = apiBase.trim().replace(/\/$/, '');
-    if (!base) { setStatus({ type: 'error', msg: 'Configure o URL do backend no topo da página.' }); return; }
+      const handleExtract = async () => {
+        if (!files.length) return;
+        const base = apiBase.trim().replace(/\/$/, '');
+        if (!base) { setStatus({ type: 'error', msg: 'Configure o URL do backend no topo da página.' }); return; }
 
-    setLoading(true);
-    setStatus({ type: 'loading', msg: `A enviar ${files.length} imagem(ns) para extracção…` });
-    setTransactions([]);
-    setErrors([]);
-    setExported(false);
+        setLoading(true);
+        setStatus({ type: 'loading', msg: `A enviar ${files.length} imagem(ns) para extracção…` });
+        setTransactions([]);
+        setErrors([]);
+        setExported(false);
 
-    const form = new FormData();
-    files.forEach(f => form.append('files', f));
+        const form = new FormData();
+        files.forEach(f => form.append('files', f));
 
-    try {
-      const res = await fetch(`${base}/extract`, { method: 'POST', body: form });
-      if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
-      const data = await res.json();
+        try {
+          const res = await fetch(`${base}/extract`, { method: 'POST', body: form });
+          if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+          const data = await res.json();
 
-      const allTx = [];
-      const errs  = [];
+          const allTx = [];
+          const errs = [];
 
-      data.forEach(result => {
-        if (result.erro) errs.push(`${result.ficheiro}: ${result.erro}`);
-        allTx.push(...result.transacoes);
-      });
+          data.forEach(result => {
+            if (result.erro) errs.push(`${result.ficheiro}: ${result.erro}`);
+            allTx.push(...result.transacoes);
+          });
 
-      setTransactions(allTx);
-      setErrors(errs);
+          setTransactions(allTx);
+          setErrors(errs);
 
-      if (allTx.length === 0) {
-        setStatus({ type: 'error', msg: 'Nenhuma transação extraída. Verifique as imagens.' });
-      } else {
-        setStatus({ type: 'success', msg: `✓ ${allTx.length} transacção(ões) extraída(s) de ${data.length} ficheiro(s).` });
-      }
-    } catch (err) {
-      setStatus({ type: 'error', msg: `Erro: ${err.message}` });
-    } finally {
-      setLoading(false);
-    }
-  };
+          if (allTx.length === 0) {
+            setStatus({ type: 'error', msg: 'Nenhuma transação extraída. Verifique as imagens.' });
+          } else {
+            setStatus({ type: 'success', msg: `✓ ${allTx.length} transacção(ões) extraída(s) de ${data.length} ficheiro(s).` });
+          }
+        } catch (err) {
+          setStatus({ type: 'error', msg: `Erro: ${err.message}` });
+        } finally {
+          setLoading(false);
+        }
+      };
 
-  const handleExport = async () => {
-    if (!transactions.length) return;
-    const base = apiBase.trim().replace(/\/$/, '');
-    if (!base) { setStatus({ type: 'error', msg: 'Configure o URL do backend.' }); return; }
+      const handleExport = async () => {
+        if (!transactions.length) return;
+        const base = apiBase.trim().replace(/\/$/, '');
+        if (!base) { setStatus({ type: 'error', msg: 'Configure o URL do backend.' }); return; }
 
-    setExporting(true);
-    setStatus({ type: 'loading', msg: 'A exportar para Google Sheets…' });
+        setExporting(true);
+        setStatus({ type: 'loading', msg: 'A exportar para Google Sheets…' });
 
-    try {
-      const res = await fetch(`${base}/export`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ transacoes: transactions })
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
-      const data = await res.json();
-      setStatus({ type: 'success', msg: `✓ ${data.linhas_exportadas} linha(s) adicionadas ao Google Sheets.` });
-      setExported(true);
-    } catch (err) {
-      setStatus({ type: 'error', msg: `Erro ao exportar: ${err.message}` });
-    } finally {
-      setExporting(false);
-    }
-  };
+        try {
+          const res = await fetch(`${base}/export`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ transacoes: transactions })
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+          const data = await res.json();
+          setStatus({ type: 'success', msg: `✓ ${data.linhas_exportadas} linha(s) adicionadas ao Google Sheets.` });
+          setExported(true);
+        } catch (err) {
+          setStatus({ type: 'error', msg: `Erro ao exportar: ${err.message}` });
+        } finally {
+          setExporting(false);
+        }
+      };
 
-  const updateTx = (idx, key, val) => {
-    setTransactions(prev => prev.map((t, i) => i === idx ? { ...t, [key]: val } : t));
-  };
+      const updateTx = (idx, key, val) => {
+        setTransactions(prev => prev.map((t, i) => i === idx ? { ...t, [key]: val } : t));
+      };
 
-  const clearAll = () => {
-    setFiles([]);
-    setPreviews([]);
-    setTransactions([]);
-    setErrors([]);
-    setStatus(null);
-    setExported(false);
-  };
+      const clearAll = () => {
+        setFiles([]);
+        setPreviews([]);
+        setTransactions([]);
+        setErrors([]);
+        setStatus(null);
+        setExported(false);
+      };
 
-  return (
-    <>
-      <header>
-        <div className="logo">
-          <span className="logo-title">Extrato OCR</span>
-          <span className="logo-tag">Angola · AOA</span>
-        </div>
-        <div className="api-input-wrap">
-          <span className="api-label">Backend URL</span>
-          <input
-            className="api-input"
-            type="text"
-            placeholder="https://seu-backend.onrender.com"
-            value={apiBase}
-            onChange={e => setApiBase(e.target.value)}
-          />
-        </div>
-      </header>
+      return (
+        <>
+          <header>
+            <div className="logo">
+              <span className="logo-title">Extrato OCR</span>
+              <span className="logo-tag">Angola · AOA</span>
+            </div>
+            <div className="api-input-wrap">
+              <span className="api-label">Backend URL</span>
+              <input
+                className="api-input"
+                type="text"
+                placeholder="https://seu-backend.onrender.com"
+                value={apiBase}
+                onChange={e => setApiBase(e.target.value)}
+              />
+            </div>
+          </header>
 
-      <main>
-        {/* ── UPLOAD ── */}
-        <div className="section-label">01 · Carregar Extratos</div>
+          <main>
+            {/* ── UPLOAD ── */}
+            <div className="section-label">01 · Carregar Extratos</div>
 
-        <div
-          className={`dropzone ${dragOver ? 'drag-over' : ''}`}
-          onDragOver={e => { e.preventDefault(); setDragOver(true); }}
-          onDragLeave={() => setDragOver(false)}
-          onDrop={handleDrop}
-          onClick={() => fileInputRef.current.click()}
-        >
-          <span className="drop-icon">📄</span>
-          <div className="drop-title">Arraste as imagens de extrato aqui</div>
-          <div className="drop-sub">JPG · PNG · WEBP · máximo 20 ficheiros</div>
-          <span className="drop-btn">Escolher ficheiros</span>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            multiple
-            style={{ display: 'none' }}
-            onChange={e => addFiles(e.target.files)}
-          />
-        </div>
-
-        {previews.length > 0 && (
-          <div className="thumbs-grid">
-            {previews.map((p, i) => (
-              <div className="thumb" key={i}>
-                <img src={p.url} alt={p.name} />
-                <button className="thumb-remove" onClick={e => { e.stopPropagation(); removeFile(i); }}>✕</button>
-                <div className="thumb-name">{p.name}</div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div className="btn-row">
-          <button
-            className="btn btn-primary"
-            onClick={handleExtract}
-            disabled={loading || !files.length}
-          >
-            {loading ? <><span className="spinner" /> A extrair…</> : <>⚡ Extrair Dados</>}
-          </button>
-          {(files.length > 0 || transactions.length > 0) && (
-            <button className="btn btn-secondary" onClick={clearAll} disabled={loading}>
-              ✕ Limpar tudo
-            </button>
-          )}
-          {transactions.length > 0 && (
-            <button
-              className="btn btn-export"
-              onClick={handleExport}
-              disabled={exporting || exported}
+            <div
+              className={`dropzone ${dragOver ? 'drag-over' : ''}`}
+              onDragOver={e => { e.preventDefault(); setDragOver(true); }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={handleDrop}
+              onClick={() => fileInputRef.current.click()}
             >
-              {exporting ? <><span className="spinner" /> Exportando…</> : exported ? '✓ Exportado' : '📊 Exportar para Google Sheets'}
-            </button>
-          )}
-        </div>
-
-        {status && (
-          <div className={`status-bar ${status.type}`}>
-            {status.type === 'loading' && <span className="spinner" />}
-            {status.msg}
-          </div>
-        )}
-
-        {/* ── RESULTS ── */}
-        {transactions.length > 0 && (
-          <div className="results-section">
-            <div className="section-label">02 · Dados Extraídos</div>
-
-            <div className="results-meta">
-              <div className="results-count">
-                <span>{transactions.length}</span> transacção(ões) · clique nas células para editar
-              </div>
+              <span className="drop-icon">📄</span>
+              <div className="drop-title">Arraste as imagens de extrato aqui</div>
+              <div className="drop-sub">JPG · PNG · WEBP · máximo 20 ficheiros</div>
+              <span className="drop-btn">Escolher ficheiros</span>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                multiple
+                style={{ display: 'none' }}
+                onChange={e => addFiles(e.target.files)}
+              />
             </div>
 
-            {errors.length > 0 && (
-              <div className="file-errors">
-                {errors.map((e, i) => <div className="file-error" key={i}>⚠ {e}</div>)}
+            {previews.length > 0 && (
+              <div className="thumbs-grid">
+                {previews.map((p, i) => (
+                  <div className="thumb" key={i}>
+                    <img src={p.url} alt={p.name} />
+                    <button className="thumb-remove" onClick={e => { e.stopPropagation(); removeFile(i); }}>✕</button>
+                    <div className="thumb-name">{p.name}</div>
+                  </div>
+                ))}
               </div>
             )}
 
-            <div className="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    {COLS.map(c => <th key={c.key}>{c.label}</th>)}
-                  </tr>
-                </thead>
-                <tbody>
-                  {transactions.map((tx, i) => (
-                    <tr key={i}>
-                      <td style={{ color: 'var(--muted)', userSelect: 'none' }}>{i + 1}</td>
-                      {COLS.map(c => (
-                        <td key={c.key} className={c.cls}>
-                          {c.key === 'tipo_movimento' ? (
-                            <span className="badge-tipo" title={tx[c.key]}>{tx[c.key] || '—'}</span>
-                          ) : (
-                            <input
-                              value={tx[c.key] || ''}
-                              onChange={e => updateTx(i, c.key, e.target.value)}
-                            />
-                          )}
-                        </td>
+            <div className="btn-row">
+              <button
+                className="btn btn-primary"
+                onClick={handleExtract}
+                disabled={loading || !files.length}
+              >
+                {loading ? <><span className="spinner" /> A extrair…</> : <>⚡ Extrair Dados</>}
+              </button>
+              {(files.length > 0 || transactions.length > 0) && (
+                <button className="btn btn-secondary" onClick={clearAll} disabled={loading}>
+                  ✕ Limpar tudo
+                </button>
+              )}
+              {transactions.length > 0 && (
+                <button
+                  className="btn btn-export"
+                  onClick={handleExport}
+                  disabled={exporting || exported}
+                >
+                  {exporting ? <><span className="spinner" /> Exportando…</> : exported ? '✓ Exportado' : '📊 Exportar para Google Sheets'}
+                </button>
+              )}
+            </div>
+
+            {status && (
+              <div className={`status-bar ${status.type}`}>
+                {status.type === 'loading' && <span className="spinner" />}
+                {status.msg}
+              </div>
+            )}
+
+            {/* ── RESULTS ── */}
+            {transactions.length > 0 && (
+              <div className="results-section">
+                <div className="section-label">02 · Dados Extraídos</div>
+
+                <div className="results-meta">
+                  <div className="results-count">
+                    <span>{transactions.length}</span> transacção(ões) · clique nas células para editar
+                  </div>
+                </div>
+
+                {errors.length > 0 && (
+                  <div className="file-errors">
+                    {errors.map((e, i) => <div className="file-error" key={i}>⚠ {e}</div>)}
+                  </div>
+                )}
+
+                <div className="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        {COLS.map(c => <th key={c.key}>{c.label}</th>)}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {transactions.map((tx, i) => (
+                        <tr key={i}>
+                          <td style={{ color: 'var(--muted)', userSelect: 'none' }}>{i + 1}</td>
+                          {COLS.map(c => (
+                            <td key={c.key} className={c.cls}>
+                              {c.key === 'tipo_movimento' ? (
+                                <span className="badge-tipo" title={tx[c.key]}>{tx[c.key] || '—'}</span>
+                              ) : (
+                                <input
+                                  value={tx[c.key] || ''}
+                                  onChange={e => updateTx(i, c.key, e.target.value)}
+                                />
+                              )}
+                            </td>
+                          ))}
+                        </tr>
                       ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                    </tbody>
+                  </table>
+                </div>
 
-            {exported && (
-              <div className="export-success">
-                ✓ Dados enviados com sucesso para o Google Sheets. As linhas foram adicionadas ao final da planilha.
+                {exported && (
+                  <div className="export-success">
+                    ✓ Dados enviados com sucesso para o Google Sheets. As linhas foram adicionadas ao final da planilha.
+                  </div>
+                )}
               </div>
             )}
-          </div>
-        )}
-      </main>
-    </>
-  );
-}
+          </main>
+        </>
+      );
+    }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-</script>
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
 </body>
+
 </html>
