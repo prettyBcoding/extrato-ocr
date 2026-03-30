@@ -4,5 +4,6 @@ python-multipart
 httpx
 google-auth
 google-api-python-client
+google-cloud-documentai
 python-dotenv
 pydantic
