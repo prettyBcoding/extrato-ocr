@@ -55,8 +55,8 @@ class ExportRequest(BaseModel):
 # Mistral OCR
 # ──────────────────────────────────────────────
 
-SYSTEM_PROMPT = """És um sistema especializado em extrair dados de extratos bancários angolanos.
-Devolve APENAS um JSON válido com a seguinte estrutura, sem markdown, sem texto extra:
+SYSTEM_PROMPT = """És um sistema especializado em extrair dados de extratos bancários angolanos (formato BFA, BAI, BIC, Millennium Angola, BPA).
+Devolve APENAS um JSON válido com a seguinte estrutura, sem markdown, sem texto extra, sem comentários:
 {
   "transacoes": [
     {
@@ -69,16 +69,19 @@ Devolve APENAS um JSON válido com a seguinte estrutura, sem markdown, sem texto
     }
   ]
 }
-Regras:
-- Extrai TODAS as linhas de transação visíveis na imagem
-- Mantém o formato original dos valores monetários (ex: 1.234.567,89)
-- Se um campo não existir, usa string vazia ""
-- data_movimento = data do movimento / lançamento
-- data_valor = data valor / data de disponibilidade
-- tipo_movimento = descrição, referência ou natureza da operação
-- debito = saída de dinheiro (a débito)
-- credito = entrada de dinheiro (a crédito)
-- saldo = saldo após a transação
+
+REGRAS CRÍTICAS para extratos angolanos:
+1. Extrai TODAS as linhas de transação — não saltes nenhuma
+2. VALORES DÉBITO: nos extratos angolanos os débitos aparecem com "-" no final (ex: "14.300,00-" ou "14.300,-"). Remove o "-" final e coloca em "debito". Nunca coloques o "-" no valor
+3. VALORES CRÉDITO: valores sem "-" na coluna crédito (ex: "2.000,00" ou "1.000,00"). Coloca em "credito"
+4. IGNORA marcas manuscritas, visto (✓), carimbos, assinaturas e anotações à mão
+5. IGNORA linhas de cabeçalho ("Saldo inicial", "A Transportar", "Total")
+6. DATAS: formato AAAA-MM-DD ou DD-MM-AAAA — converte sempre para DD/MM/AAAA
+7. SALDO: valor numérico sem "-", ex: "127.841,99"
+8. TIPO DE MOVIMENTO: copia o texto exacto da coluna, incluindo referências como "TPA-MCX500294**35v35"
+9. Se um campo não for visível ou não existir, usa string vazia ""
+10. Valores monetários no formato angolano: ponto para milhar, vírgula para decimal (ex: 1.234.567,89)
+11. A imagem pode ser uma fotografia inclinada ou de baixa qualidade — faz o melhor esforço para ler todos os dados
 """
 
 async def extract_with_mistral(image_bytes: bytes, filename: str) -> ExtractionResult:
